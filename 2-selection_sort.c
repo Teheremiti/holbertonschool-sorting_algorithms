@@ -1,34 +1,39 @@
 #include "sort.h"
+
 /**
- * selection_sort - sorts an array in ascending order with selection sort
- * @array: array to be sorted
- * @size: max size of array
+ * selection_sort - Sorts an array in ascending order with selection sort
+ *
+ * @array: Array to be sorted
+ * @size: Size of array
  */
+
 void selection_sort(int *array, size_t size)
 {
-	size_t i = 0;
-	size_t j = 0;
-	int runner = 0;
-	int tmp = 0;
+	size_t i, j;
+	int tmp;
 
 	if (!array || !size)
 		return;
-	while (i < size - 1)
+
+	for (i = 0; i < size; i++)
 	{
-		while (j < size - 1)
+		size_t k = i;
+		int swap = 0;
+
+		for (j = i + 1; j < size; j++)
 		{
-			runner = array[i];
-			j++;
-			if (array[j] < runner)
+			if (array[j] < array[k])
 			{
-				tmp = array[j];
-				array[j] = runner;
-				runner = tmp;
-				array[i] = runner;
-				print_array(array, size);
+				k = j;
+				swap = 1;
 			}
 		}
-		i++;
-		j = i;
+
+		tmp = array[i];
+		array[i] = array[k];
+		array[k] = tmp;
+
+		if (swap)
+			print_array(array, size);
 	}
 }
